@@ -7,4 +7,26 @@ table {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
     }
+
+    tbody {
+        tr {
+            position: relative;
+
+            .edit-icon {
+                position: absolute;
+                right: -30px;
+                /* Adjust distance from table */
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 0;
+                transition: opacity 0.2s ease;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+            &:hover .edit-icon {
+                opacity: 1;
+            }
+        }
+    }
 }
