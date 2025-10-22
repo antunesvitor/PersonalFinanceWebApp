@@ -1,0 +1,10 @@
+@use '../shared/scss/variables.scss' as *;
+
+table {
+    thead tr th {
+        background-color: $vivid-sky-blue;
+        padding: 5px 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+}
