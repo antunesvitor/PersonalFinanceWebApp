@@ -13,12 +13,12 @@
     </thead>
     <tbody>
         @for(expense of expenses; track expense.id) {
-            <tr>
+            <tr [class.ungrouped]="expense.isUngrouped">
                 <td>{{expense.description}}</td>
                 <td>{{expense.value | currency: 'BRL'}}</td>
                 <td>{{expense.groupName}}</td>
                 <td>{{expense.date | date:'short':'':'pt-BR'}}</td>
-                <mat-icon class="edit-icon">edit</mat-icon>
+                <mat-icon class="edit-icon" (click)="addToGroup(expense)">edit</mat-icon>
             </tr>
         }
     </tbody>

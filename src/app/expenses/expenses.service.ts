@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { ExpensesQueryParams } from './Models/ExpensesQueryParams';
 import { PaginatedExpensesResponse } from './Models/PaginatedExpensesResponse';
 import { Observable } from 'rxjs';
+import { Group } from './Models/Groups';
+import { ThisReceiver } from '@angular/compiler';
+import { Expense, ExpenseWS } from './Models/Expense';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpensesService {
-  private apiUrl = 'http://localhost:5294/api/expenses';
+  private apiUrl = 'http://localhost:5294/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +32,15 @@ export class ExpensesService {
       httpParams = httpParams.set('endDate', params.endDate);
     }
 
-    return this.http.get<PaginatedExpensesResponse>(this.apiUrl, { params: httpParams });
+    return this.http.get<PaginatedExpensesResponse>(this.apiUrl + 'expenses/', { params: httpParams });
+  }
+
+  getGroups(): Observable<Group[]> {
+    return this.http.get<Group[]>(this.apiUrl + 'groups/')
+  }
+
+  addExpensetoGroup(expenseId: number, groupId: number): Observable<ExpenseWS>{
+    // throw new Error("Blah blah blah");
+    return this.http.put<ExpenseWS>(this.apiUrl + `expenses/${expenseId}/add-to-group/${groupId}`, null);
   }
 }

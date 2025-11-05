@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Adicionar despesa ao grupo</h2>
+<mat-dialog-content>
+    <p><strong>Despesa:</strong> {{data.expenseName}}</p>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Selecione o grupo</mat-label>
+        <mat-select [(ngModel)]="selectedGroup">
+            @for(group of data.groups; track group) 
+            {
+                <mat-option [value]="group">{{group.name}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+<div class="error-msg" [class.ativo]="errorHappened">
+    <span>Ops! Ocorreu um erro, tente novamente mais tarde.</span>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()" [disabled]="!selectedGroup">
+        Confirmar
+    </button>
+</mat-dialog-actions>
