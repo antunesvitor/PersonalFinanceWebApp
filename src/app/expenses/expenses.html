@@ -1,25 +1,35 @@
-<h1>
-    Gastos
-</h1>
+<article>
+    <section class="title">
+        <h1>
+            Gastos
+        </h1>
+    </section>
 
-<table>
-    <thead>
-        <tr>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Categoria</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for(expense of expenses; track expense.id) {
-            <tr [class.ungrouped]="expense.isUngrouped">
-                <td>{{expense.description}}</td>
-                <td>{{expense.value | currency: 'BRL'}}</td>
-                <td>{{expense.groupName}}</td>
-                <td>{{expense.date | date:'short':'':'pt-BR'}}</td>
-                <mat-icon class="edit-icon" (click)="addToGroup(expense)">edit</mat-icon>
-            </tr>
-        }
-    </tbody>
-</table>
+    <section class="list">
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Categoria</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(expense of expenses; track expense.id) {
+                <tr [class.ungrouped]="expense.isUngrouped">
+                    <td>{{expense.description}}</td>
+                    <td>{{expense.value | currency: 'BRL'}}</td>
+                    <td>{{expense.groupName}}</td>
+                    <td>{{expense.date | date:'short':'':'pt-BR'}}</td>
+                    <mat-icon class="edit-icon" (click)="addToGroup(expense)">edit</mat-icon>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+
+    <mat-paginator [length]="totalRecords" [pageSize]="pageSize" (page)="onPageChange($event)">
+    </mat-paginator>
+
+</article>

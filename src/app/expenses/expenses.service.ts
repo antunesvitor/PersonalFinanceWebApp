@@ -17,7 +17,7 @@ export class ExpensesService {
 
   getExpenses(params: ExpensesQueryParams): Observable<PaginatedExpensesResponse> {
     let httpParams = new HttpParams();
-
+    console.log('params:', params);
     // Add parameters if they exist
     if (params.pageSize) {
       httpParams = httpParams.set('pageSize', params.pageSize.toString());

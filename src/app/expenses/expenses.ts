@@ -5,7 +5,7 @@ import { PaginatedExpensesResponse } from './Models/PaginatedExpensesResponse';
 import { MatDialog } from '@angular/material/dialog';
 import { AddToGroupDialog } from './add-to-group-dialog/add-to-group-dialog';
 import { Group } from './Models/Groups';
-import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-expenses',
@@ -90,8 +90,8 @@ export class Expenses implements OnInit {
     });
   }
 
-  onPageChange(page: number): void {
-    this.currentPage = page;
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex + 1;
     this.loadExpenses();
   }
 }
