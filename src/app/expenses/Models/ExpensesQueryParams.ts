@@ -1,6 +1,6 @@
 export interface ExpensesQueryParams {
   pageSize?: number;
   page?: number;
-  startDate?: string;
-  endDate?: string;
+  startDate?: Date | null;
+  endDate?: Date | null;
 }

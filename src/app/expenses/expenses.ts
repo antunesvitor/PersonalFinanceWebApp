@@ -6,6 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddToGroupDialog } from './add-to-group-dialog/add-to-group-dialog';
 import { Group } from './Models/Groups';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-expenses',
@@ -24,6 +27,10 @@ export class Expenses implements OnInit {
   isLoadingGroups = false;
   errorGroups: string | null = null;
   groups: Group[] = [];
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
 
   constructor(private expensesService: ExpensesService, public dialog: MatDialog) { }
 
@@ -39,8 +46,8 @@ export class Expenses implements OnInit {
     this.expensesService.getExpenses({
       pageSize: this.pageSize,
       page: this.currentPage,
-      startDate: '2025-01-01',
-      endDate: '2025-01-31'
+      startDate: this.range.value.start,
+      endDate: this.range.value.end
     }).subscribe({
       next: (response: PaginatedExpensesResponse) => {
         this.expenses = response.data.map(x => new Expense(x))
@@ -54,6 +61,10 @@ export class Expenses implements OnInit {
         this.isLoadingExpenses = false;
       }
     });
+  }
+
+  filterExpenses() {
+    
   }
 
   loadGroups(){
